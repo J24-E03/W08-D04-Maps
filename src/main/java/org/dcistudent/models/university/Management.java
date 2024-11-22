@@ -3,12 +3,12 @@ package org.dcistudent.models.university;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter @Setter
 public class Management {
-    private Double studentGradeTreshold = 70.0;
+    public static final Double STUDENT_GRADE_TRESHOLD = 70.0;
     Map<String, Student> students = new HashMap<>();
 
     public Management addStudent(@NotNull Student student) {
@@ -17,18 +17,19 @@ public class Management {
         return this;
     }
 
-    public Double getGrade(String name) {
+    public Double getGrade(@NotBlank String name) {
         return this.students.get(name).getGrade();
     }
 
     public Double getAverageGrade() {
         Double total = 0.0;
-        for (Student student : this.students.values()) {
-            total += student.getGrade();
-        }
 
         if (this.students.isEmpty()) {
-            return 0.0;
+            return total;
+        }
+
+        for (Student student : this.students.values()) {
+            total += student.getGrade();
         }
 
         return total / this.students.size();
@@ -45,7 +46,7 @@ public class Management {
         return highest;
     }
 
-    public Map<String, Student> getAboveGradeThreshold(Double threshold) {
+    public Map<String, Student> getAboveGradeThreshold(@NotNull Double threshold) {
         Map<String, Student> aboveThreshold = new HashMap<>();
         for (Student student : this.students.values()) {
             if (student.getGrade() >= threshold) {

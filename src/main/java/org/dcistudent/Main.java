@@ -60,7 +60,6 @@ public class Main {
             wordCount.put(word, wordCount.getOrDefault(word, 1) + 1);
         }
 
-        // @todo: sorting
         System.out.println("Word count: " + wordCount);
         System.out.println("----------");
 
@@ -205,7 +204,7 @@ public class Main {
         System.out.printf("Highest grade: %.2f%n", management.getHighestGrade());
         System.out.printf(
                 "Students above threshold: %s%n",
-                management.getAboveGradeThreshold(management.getStudentGradeTreshold())
+                management.getAboveGradeThreshold(Management.STUDENT_GRADE_TRESHOLD)
         );
 
         return this;
